@@ -1,0 +1,22 @@
+variables:
+  DOCKER_HOST: tcp://thedockerhost:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  TEMPLATE: /opt/vilicus/contrib/gitlab.tpl
+  OUTPUT: /artifacts/gl-container-scanning-report.json
+
+.vilicus:
+  services:
+    - name: docker:dind
+      alias: thedockerhost
+  image:
+    name: docker:stable
+  before_script:
+    - apk add --no-cache docker-compose bash
+    - wget -O run-job.sh https://raw.githubusercontent.com/edersonbrilhante/vilicus/develop/scripts/run-job.sh
+    - chmod +x ./run-job.sh
+  artifacts:
+    reports:
+      container_scanning: artifacts/gl-container-scanning-report.json
+  script:
+    - ./run-job.sh
