@@ -3,9 +3,7 @@
 ## How to use
 ```yaml
 include:
-  - project: 'https://github.com/edersonbrilhante/vilicus-gitlab'
-    ref: 'main'
-    file: 'Vilicus.gitlab-ci.yml'
+  - remote: https://raw.githubusercontent.com/edersonbrilhante/vilicus-gitlab/feature/add-template/Vilicus.gitlab-ci.yml  
 
 # scanning a remote image
 remote_image:
